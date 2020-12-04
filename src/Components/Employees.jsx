@@ -9,7 +9,7 @@ const Employees = React.memo(props => {
     useEffect(() => {//getPeople
         props.addItems();
         
-    }, [props.items.length]);
+    }, []);
 
    
     let isEmpty;
@@ -34,7 +34,7 @@ const Employees = React.memo(props => {
         localStorage.setItem('items', JSON.stringify(checkboxs));
 
     }, [checkboxs]);
-    // ---------------------------------------------------------------for Birthdays
+    
 
     useEffect(() => {
         if(props.items.length != 0 ){
@@ -42,11 +42,13 @@ const Employees = React.memo(props => {
             props.setUsers(checkboxs);  
         }
 
-    }, [checkboxs, props.items.length]); 
-//No selected employees
+    }, [checkboxs, props.items.length]);
+    
     return (<>
         <div className={style.employees}>
-            Employees
+            <h1 className={style.forTitle}>
+                Employees
+            </h1>
            <div>
                 {arr_EN
                     .map((letter, index, array) => {
@@ -95,12 +97,15 @@ const Employees = React.memo(props => {
             </div>
         </div>
         <div className={style.empBirthday}>
-           Employees Birthdays
+            <h1 className={style.forTitle}>
+                Employees Birthdays
+            </h1>
+
             {/* Прізвище Імя - день(31) Місяць, рік(1944) year*/}
             {(checkboxs.length === 0) 
             ?  
             <div> 
-                <h3>
+                <h3 className={style.BirthItems}>
                     No selected employees
                 </h3>
             </div>
@@ -109,7 +114,7 @@ const Employees = React.memo(props => {
                     month => {
                         return month.id.length != 0 
                         && 
-                        <div> 
+                        <div className={style.BirthItems}> 
                             <h3>
                                 {month.name}
                             </h3>
